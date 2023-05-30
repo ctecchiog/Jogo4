@@ -1,7 +1,8 @@
 #include "Jogo.h"
 
-    Jogo::Jogo() : window(sf::VideoMode(1366, 768), "Fever Dream"),
-        jogador(Jogador(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(50.0f, 50.0f))) 
+    Jogo::Jogo() : 
+        jogador(Jogador(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(50.0f, 50.0f))),
+        pGrafico(pGrafico->getGerenciadorGrafico())
     {
         sf::RectangleShape plataforma1(sf::Vector2f(200.0f, 20.0f));
         plataforma1.setPosition(400.0f, 500.0f);
@@ -39,13 +40,14 @@
     void Jogo::inputuser() 
     {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (pGrafico->getWindow()->pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
-                window.close();
+                pGrafico->fechaJanela();
 
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape)
-                    window.close();
+                    pGrafico->fechaJanela();
             }
 
             if (event.type == sf::Event::KeyPressed) {
@@ -89,17 +91,17 @@
 
     void Jogo::render() 
     {
-        window.clear();
+        pGrafico->limpaJanela();;
 
-        window.draw(jogador.forma);
+        pGrafico->desenhaElemento(jogador.forma);
 
         for (const auto& plataforma : plataformas)
-            window.draw(plataforma);
+            pGrafico->desenhaElemento(plataforma);
 
         for (const auto& projetil : projeteis)
-            window.draw(projetil);
+            pGrafico->desenhaElemento(projetil);
 
-        window.display();
+        pGrafico->mostraElementos();
     }
 
     void Jogo::atirar() 
@@ -129,7 +131,7 @@
 
     void Jogo::run() 
     {
-        while (window.isOpen()) {
+        while (pGrafico->verificaJanelaAberta()) {
             inputuser();
             update();
             render();
