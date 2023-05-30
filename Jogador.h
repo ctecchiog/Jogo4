@@ -1,17 +1,17 @@
 #pragma once
 #include "stdafx.h"
+#include "Personagem.h"
 #include <SFML/Graphics.hpp>
 
-class Jogador
+class Jogador: public Personagem
 {
-public:
-    sf::RectangleShape forma;
-    sf::Vector2f velocidade;
+private:
     bool pulando;
-
+public:
     Jogador(sf::Vector2f position, sf::Vector2f size);
     ~Jogador();
     void update();
     void pular();
     void aplicarGravidade();
+    bool getPulando();
 };

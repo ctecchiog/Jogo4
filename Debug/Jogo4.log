@@ -1,2 +1,12 @@
-﻿  Gerenciador_Grafico.cpp
-  Jogo4.vcxproj -> C:\Users\ctecc\source\repos\Jogo4\Debug\Jogo4.exe
+﻿  Ente.cpp
+  Gerenciador_Grafico.cpp
+  Jogador.cpp
+  Jogo.cpp
+C:\Users\ctecc\source\repos\Jogo4\Jogo.cpp(60,48): error C2106: '=': operando à esquerda deve ser l-value
+C:\Users\ctecc\source\repos\Jogo4\Jogo.cpp(62,47): error C2106: '=': operando à esquerda deve ser l-value
+C:\Users\ctecc\source\repos\Jogo4\Jogo.cpp(64,46): error C2106: '=': operando à esquerda deve ser l-value
+C:\Users\ctecc\source\repos\Jogo4\Jogo.cpp(79,50): error C2106: '=': operando à esquerda deve ser l-value
+C:\Users\ctecc\source\repos\Jogo4\Jogo.cpp(81,46): error C2106: '=': operando à esquerda deve ser l-value
+  main.cpp
+  Personagem.cpp
+  Gerando Código...

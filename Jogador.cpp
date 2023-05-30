@@ -1,13 +1,8 @@
 #include "Jogador.h"
 
-Jogador::Jogador(sf::Vector2f position, sf::Vector2f size)
+Jogador::Jogador(sf::Vector2f position, sf::Vector2f size): 
+    Personagem (position, size), pulando (false)
 {
-    forma.setPosition(position);
-    forma.setSize(size);
-    forma.setFillColor(sf::Color(255, 128, 128));
-    velocidade.x = 0.0f;
-    velocidade.y = 0.0f;
-    pulando = false;
 }
 
 Jogador::~Jogador()
@@ -29,4 +24,9 @@ void Jogador::pular()
 void Jogador::aplicarGravidade() 
 {
     velocidade.y += GRAVIDADE;
+}
+
+bool Jogador::getPulando()
+{
+    return pulando;
 }

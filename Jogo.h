@@ -7,8 +7,7 @@
 class Jogo 
 {
 public:
-    //sf::RenderWindow window;
-    Jogador jogador;
+    Jogador* jogador;
     std::vector<sf::RectangleShape> plataformas;
     std::vector<sf::RectangleShape> projeteis;
     Gerenciador_Grafico* pGrafico;

@@ -1,7 +1,7 @@
 #include "Jogo.h"
 
     Jogo::Jogo() : 
-        jogador(Jogador(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(50.0f, 50.0f))),
+        jogador(new Jogador(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(50.0f, 50.0f))),
         pGrafico(pGrafico->getGerenciadorGrafico())
     {
         sf::RectangleShape plataforma1(sf::Vector2f(200.0f, 20.0f));
@@ -57,27 +57,28 @@
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            jogador.velocidade.x = -MOVER;
+            jogador->getVelocidade().x = -MOVER;
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            jogador.velocidade.x = MOVER;
+            jogador->getVelocidade().x = MOVER;
         else
-            jogador.velocidade.x = 0.0f;
+            jogador->getVelocidade().x = 0.0f;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            jogador.pular();
+            jogador->pular();
     }
 
     void Jogo::update() 
     {
-        jogador.aplicarGravidade();
-        jogador.update();
+        jogador->aplicarGravidade();
+        jogador->update();
 
         // Colisao plataforma jogador
         for (const auto& platforma : plataformas) {
-            if (jogador.forma.getGlobalBounds().intersects(platforma.getGlobalBounds())) {
-                jogador.velocidade.y = 0.0f;
-                jogador.forma.setPosition(jogador.forma.getPosition().x, platforma.getPosition().y - jogador.forma.getSize().y);
-                jogador.pulando = false;
+            if (jogador->getForma().getGlobalBounds().intersects(platforma.getGlobalBounds())) 
+            {
+                jogador->getVelocidade().y = 0.0f;
+                jogador->getForma().setPosition(jogador->getForma().getPosition().x, platforma.getPosition().y - jogador->getForma().getSize().y);
+                jogador->getPulando() = false;
             }
         }
 
@@ -93,7 +94,7 @@
     {
         pGrafico->limpaJanela();;
 
-        pGrafico->desenhaElemento(jogador.forma);
+        pGrafico->desenhaElemento(jogador->getForma());
 
         for (const auto& plataforma : plataformas)
             pGrafico->desenhaElemento(plataforma);
@@ -107,7 +108,7 @@
     void Jogo::atirar() 
     {
         sf::RectangleShape projetil(sf::Vector2f(10.0f, 5.0f));
-        projetil.setPosition(jogador.forma.getPosition().x + jogador.forma.getSize().x, jogador.forma.getPosition().y + jogador.forma.getSize().y / 2.0f);
+        projetil.setPosition(jogador->getForma().getPosition().x + jogador->getForma().getSize().x, jogador->getForma().getPosition().y + jogador->getForma().getSize().y / 2.0f);
         projetil.setFillColor(sf::Color::Red);
         projeteis.push_back(projetil);
     }
@@ -117,11 +118,11 @@
         // Colisao com plataformas
         for (const auto& plataforma : plataformas) 
 {
-            sf::FloatRect limitesjogador = jogador.forma.getGlobalBounds();
+            sf::FloatRect limitesjogador = jogador->getForma().getGlobalBounds();
             sf::FloatRect limitesplataforma = plataforma.getGlobalBounds();
             sf::FloatRect intersection;
             if (limitesjogador.intersects((limitesplataforma), intersection)) {
-                if (jogador.velocidade.y >= 0 && intersection.height <= 2.0f) {
+                if (jogador->getVelocidade().y >= 0 && intersection.height <= 2.0f) {
                     return true;
                 }
             }
