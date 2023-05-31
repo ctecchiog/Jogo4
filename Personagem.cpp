@@ -19,6 +19,11 @@ sf::RectangleShape Personagem::getForma()
     return forma;
 }
 
+void Personagem::setVelocidade(sf::Vector2f vel)
+{
+    velocidade = vel;
+}
+
 sf::Vector2f Personagem::getVelocidade()
 {
     return velocidade;

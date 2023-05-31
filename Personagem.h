@@ -11,6 +11,7 @@ public:
 	Personagem(sf::Vector2f position, sf::Vector2f size);
 	~Personagem();
 	sf::RectangleShape getForma();
+	void setVelocidade(sf::Vector2f vel);
 	sf::Vector2f getVelocidade();
 
 };

@@ -14,4 +14,5 @@ public:
     void pular();
     void aplicarGravidade();
     bool getPulando();
+    void setPulando(bool pulando);
 };

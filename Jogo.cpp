@@ -57,11 +57,11 @@
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            jogador->getVelocidade().x = -MOVER;
+            jogador->setVelocidade(sf::Vector2f(-MOVER, jogador->getVelocidade().y));
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            jogador->getVelocidade().x = MOVER;
+            jogador->setVelocidade(sf::Vector2f(MOVER, jogador->getVelocidade().y));
         else
-            jogador->getVelocidade().x = 0.0f;
+            jogador->setVelocidade(sf::Vector2f(0, jogador->getVelocidade().y));
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             jogador->pular();
@@ -76,9 +76,9 @@
         for (const auto& platforma : plataformas) {
             if (jogador->getForma().getGlobalBounds().intersects(platforma.getGlobalBounds())) 
             {
-                jogador->getVelocidade().y = 0.0f;
+                jogador->setVelocidade(sf::Vector2f(jogador->getVelocidade().x, 0));
                 jogador->getForma().setPosition(jogador->getForma().getPosition().x, platforma.getPosition().y - jogador->getForma().getSize().y);
-                jogador->getPulando() = false;
+                jogador->setPulando(false);
             }
         }
 
@@ -138,5 +138,3 @@
             render();
         }
     }
-
-

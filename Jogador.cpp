@@ -30,3 +30,8 @@ bool Jogador::getPulando()
 {
     return pulando;
 }
+
+void Jogador::setPulando(bool pulando)
+{
+    this->pulando = pulando;
+}
